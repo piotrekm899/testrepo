@@ -11,9 +11,6 @@ jobs:
       - uses: actions/checkout@main
       
       - name: Merge development -> main
-        uses: devmasx/merge-branch@main
-        with:
-          type: now
-          from_branch: development
-          target_branch: main
-          github_token: ${{ github.token }}
+        run: |
+          git merge  ${{ github.event.release.target_commitish }} -m echo "Release " ${{github.event.release.tag_name }}
+          git push
