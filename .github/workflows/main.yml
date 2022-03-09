@@ -11,5 +11,5 @@ jobs:
       
       - name: Merge development -> main
         run: |
-          git merge ${{ github.event.release.target_commitish }} -m echo Release ${{ github.event.release.tag_name }}
+          git merge ${{ github.event.release.target_commitish }} -m "Release ${{ github.event.release.tag_name }}"
           git push
