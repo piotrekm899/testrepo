@@ -12,6 +12,7 @@ jobs:
       - name: Merge development -> main
         run: |
           git fetch --unshallow
+          git pull
           git checkout main
           git pull
           git merge ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
