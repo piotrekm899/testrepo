@@ -7,13 +7,13 @@ jobs:
   merge-to-master:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.release.target_commitish}}
       
       - name: Merge development -> main
         run: |
           git fetch --unshallow
-          git checkout ${{github.event.release.target_commitish}}
-          git pull
           git checkout main
           git pull
           git merge ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
