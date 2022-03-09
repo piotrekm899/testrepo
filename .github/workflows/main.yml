@@ -8,10 +8,10 @@ jobs:
   merge-to-master:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Merge development -> master
-        uses: devmasx/merge-branch@master
+      - uses: actions/checkout@main
+      
+      - name: Merge development -> main
+        uses: devmasx/merge-branch@main
         with:
           type: now
           from_branch: development
