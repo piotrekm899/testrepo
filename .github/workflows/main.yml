@@ -18,8 +18,7 @@ jobs:
       
       - name: Merge development -> main / master
         run: |
-          git fetch --unshallow
-          git fetch origin
+          git fetch origin --unshallow
           git branch --list
           if git show-ref --verify origin/main; then
               git checkout main
