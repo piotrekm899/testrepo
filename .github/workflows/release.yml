@@ -1,7 +1,7 @@
 name: Release version
 on:
   release:
-    types: [released]
+    types: [prereleased]
 
 jobs:
   merge-to-master:
@@ -16,7 +16,10 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
       
-      - name: Merge development -> main / master
-        run:
+      - name: Check conflicts
+        run: |
+          git fetch origin
+          git checkout master || git checkout main
           git diff --name-only --diff-filter=U
-
+          git merge  --no-ff ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
+          git push

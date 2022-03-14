@@ -1,10 +1,10 @@
-name: Release version
+name: Check conflicts
 on:
   release:
     types: [prereleased]
 
 jobs:
-  merge-to-master:
+  check-conflicts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,9 +17,6 @@ jobs:
           git config --local user.name "Github Actions"
       
       - name: Check conflicts
-        run: |
-          git fetch origin
-          git checkout master || git checkout main
+        run:
           git diff --name-only --diff-filter=U
-          git merge  --no-ff ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
-          git push
+
