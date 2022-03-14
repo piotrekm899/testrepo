@@ -18,7 +18,7 @@ jobs:
       
       - name: Merge develop to master / main
         run: |
-          git fetch origin
+          git fetch origin --unshallow
           git checkout master || git checkout main
           git diff --name-only --diff-filter=U
           git merge  --no-ff ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
