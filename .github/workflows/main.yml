@@ -19,10 +19,10 @@ jobs:
       - name: Merge development -> main / master
         run: |
           git fetch --unshallow
-          if [ git show-ref --verify refs/heads/main ];
+          if git show-ref --verify refs/heads/main;
           then
               git checkout main
-          elif [ git show-ref --verify  refs/heads/master ];
+          elif git show-ref --verify  refs/heads/master;
           then
               git checkout master
           else
