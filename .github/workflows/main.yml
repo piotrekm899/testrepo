@@ -1,7 +1,7 @@
 name: Release version
 on:
   release:
-    types: [released, edited]
+    types: [released]
 
 jobs:
   merge-to-master:
@@ -19,11 +19,13 @@ jobs:
       - name: Merge development -> main / master
         run: |
           git fetch --unshallow
-          if git show-ref --verify refs/heads/main; then
+          if git show-ref --verify main; then
               git checkout main
+          elif git show-ref --verify master; then
+              git checkout master
           else
             echo "No master or main branch"
-            exit
+            exit 1
           fi
           git merge  --no-ff ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
           git push
