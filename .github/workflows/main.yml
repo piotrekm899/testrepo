@@ -15,10 +15,11 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
+          git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
       
       - name: Merge development -> main / master
         run: |
-          git fetch origin --unshallow
+          git fetch origin
           git branch --list
           if git show-ref --verify origin/main; then
               git checkout main
