@@ -1,7 +1,7 @@
 name: Check conflicts
 on:
   release:
-    types: [released]
+    types: [prereleased]
 
 jobs:
   merge-to-master:
@@ -16,7 +16,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
       
-      - name: Merge development -> main / master
+      - name: Check conflicts
         run:
           git diff --name-only --diff-filter=U
 
