@@ -18,7 +18,8 @@ jobs:
       
       - name: Merge development -> main / master
         run: |
-          git checkout main
+          git fetch
+          git checkout master
           if git show-ref --verify main; then
               git checkout main
           elif git show-ref --verify master; then
