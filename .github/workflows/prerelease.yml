@@ -4,7 +4,7 @@ on:
     types: [prereleased]
 
 jobs:
-  merge-to-master:
+  check-conflicts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
