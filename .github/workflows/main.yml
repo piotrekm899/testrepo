@@ -19,10 +19,13 @@ jobs:
       - name: Merge development -> main / master
         run: |
           git fetch --unshallow
-          if git show-ref --verify main
+          if git show-ref --verify main then
               git checkout main
-          elif git show-ref --verify master
+          elif git show-ref --verify master then
               git checkout master
+          else
+            echo "No master or main branch"
+            exit
           fi
           git merge  --no-ff ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
           git push
