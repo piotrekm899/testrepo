@@ -2,7 +2,7 @@ name: Release version
 on:
   release:
     types: [released]
-    
+
 jobs:
   merge-to-master:
     runs-on: ubuntu-latest
@@ -16,9 +16,10 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
       
-      - name: Merge development -> main
+      - name: Merge development -> main / master
         run: |
-          git fetch --unshallow
-          git checkout main
+        
+          git fetch origin
+          git checkout master || git checkout main
           git merge  --no-ff ${{github.event.release.target_commitish}} -m "Release ${{github.event.release.tag_name}}"
           git push
