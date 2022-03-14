@@ -20,10 +20,9 @@ jobs:
       - name: Merge development -> main / master
         run: |
           git fetch origin
-          git branch --list
-          if git show-ref --verify origin/main; then
+          if git show-ref --verify main; then
               git checkout main
-          elif git show-ref --verify origin/master; then
+          elif git show-ref --verify master; then
               git checkout master
           else
             echo "No master or main branch"
