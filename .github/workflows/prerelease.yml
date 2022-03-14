@@ -17,6 +17,9 @@ jobs:
           git config --local user.name "Github Actions"
       
       - name: Check conflicts
-        run:
-          git diff --name-only --diff-filter=U
+        run: |
+          git fetch origin
+          git checkout master || git checkout main
+          git merge develop --no-ff --no-commit
+
 
